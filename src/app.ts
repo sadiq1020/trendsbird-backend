@@ -31,6 +31,11 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+import path from 'path';
+
+// Serve uploaded media assets statically
+app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
+
 if (env.NODE_ENV !== 'test') {
   app.use(morgan('dev'));
 }

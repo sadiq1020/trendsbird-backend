@@ -27,8 +27,8 @@ const PUBLIC_PATHS = [
 
 export const authGuard = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
-    // Opt-out check for public routes
-    if (PUBLIC_PATHS.includes(req.path)) {
+    // Opt-out check for public routes and static assets
+    if (PUBLIC_PATHS.includes(req.path) || req.path.startsWith('/uploads')) {
       return next();
     }
 
