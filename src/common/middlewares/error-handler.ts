@@ -24,12 +24,11 @@ export const errorHandler: ErrorRequestHandler = (
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   next: NextFunction
 ): Response => {
-  if (env.NODE_ENV === 'development') {
-    console.error(' Error Stack:', err);
-  }
-
   // Handle Custom AppError
   if (err instanceof AppError) {
+    if (env.NODE_ENV === 'development') {
+      console.error(`[AppError] ${err.statusCode} - ${err.message}`);
+    }
     return sendError(res, err.statusCode, err.message, err.code, err.details);
   }
 
@@ -39,7 +38,14 @@ export const errorHandler: ErrorRequestHandler = (
       field: e.path.join('.'),
       message: e.message,
     }));
+    if (env.NODE_ENV === 'development') {
+      console.error('[ValidationError]', formattedErrors);
+    }
     return sendError(res, 400, 'Validation failed', 'VALIDATION_ERROR', formattedErrors);
+  }
+
+  if (env.NODE_ENV === 'development') {
+    console.error(' Error Stack:', err.stack || err.message || err);
   }
 
   // Handle Prisma / Database Known Errors
