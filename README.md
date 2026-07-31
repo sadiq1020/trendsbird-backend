@@ -44,7 +44,14 @@ In this same-origin dev / modern admin dashboard setup, access and refresh token
 
 ## Seeded Credentials
 
-*(To be populated after seed script implementation)*
+Run `npx prisma db seed` to seed these default accounts into the database:
+
+- **Super Administrator** (Full system access):
+  - **Email**: `admin@trendsbird.com`
+  - **Password**: `Password123!`
+- **Catalog Manager** (Limited catalog access — useful for verifying 403 Forbidden behavior):
+  - **Email**: `catalog@trendsbird.com`
+  - **Password**: `Password123!`
 
 ## Token Strategy
 
@@ -58,7 +65,7 @@ In this same-origin dev / modern admin dashboard setup, access and refresh token
 | Permission | Complete | Full CRUD, standard/custom actions, group hierarchy, cascade role links |
 | Role | Complete | Full CRUD, permission grid linkage, grant-all shortcut, user count, lockout guard |
 | User | Complete | Explicit role assignment, bcrypt hashing, self-escalation guard, hard delete |
-| Auth | Partial (Scaffolded) | Module stubs created |
+| Auth | Complete | Login rate-limiting, HttpOnly cookies, JWT token rotation, server-side revocation |
 | Media | Partial (Scaffolded) | Module stubs created |
 | Category | Partial (Scaffolded) | Module stubs created |
 | Brand | Partial (Scaffolded) | Module stubs created |

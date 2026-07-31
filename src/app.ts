@@ -6,6 +6,7 @@ import morgan from 'morgan';
 import { env } from './config/env';
 import { sendSuccess } from './common/utils/response';
 import { errorHandler } from './common/middlewares/error-handler';
+import { authGuard } from './common/middlewares/auth.guard';
 import { authRoutes } from './modules/auth/auth.routes';
 import { permissionRoutes } from './modules/permission/permission.routes';
 import { roleRoutes } from './modules/role/role.routes';
@@ -48,6 +49,9 @@ app.get('/api/v1/health', (req: Request, res: Response) => {
     timestamp: new Date().toISOString(),
   });
 });
+
+// Global Authentication Guard (Protects all endpoints by default; public routes opt out explicitly)
+app.use(authGuard);
 
 // API Routes
 app.use('/api/v1/auth', authRoutes);

@@ -1,9 +1,22 @@
 import { Request, Response, NextFunction } from 'express';
+import { AppError } from './error-handler';
 
-// Stub for Permission Guard — will enforce RBAC string permissions in subsequent steps
 export const permissionGuard = (requiredPermission: string) => {
   return (req: Request, res: Response, next: NextFunction): void => {
-    // Prototype stub for initial scaffolding
+    if (!req.user) {
+      return next(new AppError('Unauthorized: Authentication required', 401, 'UNAUTHORIZED'));
+    }
+
+    if (!req.user.permissions || !req.user.permissions.includes(requiredPermission)) {
+      return next(
+        new AppError(
+          `Forbidden: You do not have permission '${requiredPermission}'`,
+          403,
+          'FORBIDDEN'
+        )
+      );
+    }
+
     next();
   };
 };
