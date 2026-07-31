@@ -34,7 +34,14 @@ if (env.NODE_ENV !== 'test') {
   app.use(morgan('dev'));
 }
 
-// Health Check Endpoint
+// Root & Health Check Endpoints
+app.get('/', (req: Request, res: Response) => {
+  sendSuccess(res, 200, 'Welcome to Trendsbird E-Commerce Admin Dashboard API', {
+    healthCheck: '/api/v1/health',
+    version: 'v1',
+  });
+});
+
 app.get('/api/v1/health', (req: Request, res: Response) => {
   sendSuccess(res, 200, 'Trendsbird Backend API is healthy', {
     uptime: process.uptime(),
