@@ -1,0 +1,6 @@
+export interface CategoryResponse {
+  id: string;
+  name: string;
+  slug: string;
+  active: boolean;
+}
