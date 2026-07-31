@@ -57,7 +57,7 @@ In this same-origin dev / modern admin dashboard setup, access and refresh token
 | --- | --- | --- |
 | Permission | Complete | Full CRUD, standard/custom actions, group hierarchy, cascade role links |
 | Role | Complete | Full CRUD, permission grid linkage, grant-all shortcut, user count, lockout guard |
-| User | Partial (Scaffolded) | Module stubs created |
+| User | Complete | Explicit role assignment, bcrypt hashing, self-escalation guard, hard delete |
 | Auth | Partial (Scaffolded) | Module stubs created |
 | Media | Partial (Scaffolded) | Module stubs created |
 | Category | Partial (Scaffolded) | Module stubs created |
