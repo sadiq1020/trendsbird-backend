@@ -11,7 +11,7 @@ const isProduction = env.NODE_ENV === 'production';
 const getCookieOptions = () => ({
   httpOnly: true,
   secure: isProduction,
-  sameSite: 'lax' as const,
+  sameSite: isProduction ? ('none' as const) : ('lax' as const),
   domain: env.COOKIE_DOMAIN === 'localhost' ? undefined : env.COOKIE_DOMAIN,
 });
 
@@ -38,7 +38,7 @@ export class AuthController {
     const result = await authService.login(req.body);
     setAuthCookies(res, result.accessToken, result.refreshToken);
 
-    // Also include tokens in body for Postman / mobile client flexibility
+    // Also include tokens in body for Postman / mobile / cross-origin client flexibility
     return sendSuccess(res, 200, 'Login successful', {
       user: result.user,
       accessToken: result.accessToken,
@@ -47,7 +47,7 @@ export class AuthController {
   }
 
   async refresh(req: Request, res: Response): Promise<Response> {
-    // Extract refresh token from cookie or request body (for Postman testing convenience)
+    // Extract refresh token from cookie or request body (for Postman & cross-origin convenience)
     let rawRefreshToken = req.cookies?.refreshToken || req.body?.refreshToken;
 
     if (!rawRefreshToken) {
