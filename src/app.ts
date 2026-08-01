@@ -20,7 +20,11 @@ import { productRoutes } from './modules/product/product.routes';
 const app: Application = express();
 
 // Global Middlewares
-app.use(helmet());
+app.use(
+  helmet({
+    crossOriginResourcePolicy: { policy: 'cross-origin' },
+  })
+);
 app.use(
   cors({
     origin: env.FRONTEND_URL,
