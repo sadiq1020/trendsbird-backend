@@ -70,7 +70,7 @@ Run `npx prisma db seed` to seed these default accounts into the database:
 | Category | Complete | Unlimited nesting tree, unique DB slug, cycle detection guard, child/product deletion protection |
 | Brand | Complete | Unique DB name/slug, logo media reference, product reference deletion protection |
 | Attribute | Complete | 5 attribute types, per-attribute value uniqueness, inline value management, variant deletion protection |
-| Product | Partial (Scaffolded) | Module stubs created |
+| Product | Complete | Simple/variable products, atomic transactions, variant combinations, media gallery/thumbnails, price range & SKU search |
 
 ## Known Issues
 
