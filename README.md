@@ -67,7 +67,7 @@ Run `npx prisma db seed` to seed these default accounts into the database:
 | User | Complete | Explicit role assignment, bcrypt hashing, self-escalation guard, hard delete |
 | Auth | Complete | Login rate-limiting, HttpOnly cookies, JWT token rotation, server-side revocation |
 | Media | Complete | Single/multi file upload, mime validation, sharp thumbnails, disk cleanup |
-| Category | Partial (Scaffolded) | Module stubs created |
+| Category | Complete | Unlimited nesting tree, unique DB slug, cycle detection guard, child/product deletion protection |
 | Brand | Partial (Scaffolded) | Module stubs created |
 | Attribute | Partial (Scaffolded) | Module stubs created |
 | Product | Partial (Scaffolded) | Module stubs created |
